@@ -1,0 +1,41 @@
+.footer {
+    background-color: black;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* position: absolute;
+    bottom: 0; */
+    width: 100%;
+    padding: 40px 0;
+}
+
+.footer-icons {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 10px;
+}
+
+.footer-icons img {
+    width: 24px;
+    height: 24px;
+    margin: 8px 0;
+}
+
+.footer-links {
+    display: flex;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.footer-column {
+    display: flex;
+    flex-direction: column;
+    margin-right: 18px;
+}
+
+
+.footer-copyright {
+    margin-top: 10px;
+}
