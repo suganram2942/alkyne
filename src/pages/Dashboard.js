@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import Footer from '../components/footer';
-
+import Logo2 from '../assets/Logo_white.png'
 const Container = styled.div`
   padding: 20px;
   background-color: #000;
@@ -14,7 +14,7 @@ const Section = styled.div`
   margin-bottom: 60px; /* Increased margin to accommodate the navigation dots */
 `;
 
-const Heading = styled.h1`
+const Heading = styled.h2`
   margin-top: 20px;
   font-size: 36px;
 `;
@@ -54,8 +54,7 @@ const Dot = styled.div`
 
 const Dashboard = () => {
     const location = useLocation();
-    const { data } = location.state || { data: [] };
-
+    const { data,email } = location.state || { data: [],email:[] };
     // Filter data based on prompt
     const photographyImages = data.filter(item => item.prompt === 'Photography');
     const learningImages = data.filter(item => item.prompt === 'Learning');
@@ -106,6 +105,9 @@ const Dashboard = () => {
     return (
         <Container>
             {/* Photography Section */}
+            <img src={Logo2} alt="Logo" />
+            <Heading style={{marginBottom: '20px'}}>Welcome {email}</Heading>
+            <div>Hope you having a good day!</div>
             <Section>
                 <Heading>Photography</Heading>
                 <ImageContainer ref={photoRef}>

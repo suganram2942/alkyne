@@ -9,6 +9,21 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+/* Loader CSS */
+.loader {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #000;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 `;
 
 const Content = styled.div`
@@ -62,6 +77,7 @@ const Step2 = () => {
   const navigate = useNavigate();
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const location = useLocation();
   const { email } = location.state || { email: '' };
   console.log("Data check", email);
@@ -103,8 +119,10 @@ const Step2 = () => {
     setError('');
 
     try {
+      setIsLoading(true)
       const result = await loginAndFetchData();
-      navigate('/dashboard', { state: { data: result } });
+      setIsLoading(false)
+      navigate('/dashboard', { state: { data: result,email:email } });
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -132,9 +150,15 @@ const Step2 = () => {
                 onChange={(e) => setPassword(e.target.value)}
               />
               {error && <ErrorMessage>{error}</ErrorMessage>}
-              <Button style={{ position: 'absolute', right: 0 }} onClick={handleContinue}>
-                Agree & Continue
-              </Button>
+              {
+                isLoading ? (
+                  <div className="loader" style={{ position: 'absolute', right: 0 }}></div>
+                ) : (
+                  <Button style={{ position: 'absolute', right: 0 }} onClick={handleContinue}>
+                    Agree & Continue
+                  </Button>
+                )
+              }
               <div style={{ marginTop: '4px', width: '300px' }}>
                 Use a minimum of 6 characters (case sensitive) with at least one number or special character.
               </div>
